@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Clarendon Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/shared.css" />
+  <style>
+    .services-overview { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 80px; }
+    .sov-card { background: var(--white); border: 1px solid var(--grey-100); border-radius: 10px; padding: 24px 20px; text-align: center; cursor: pointer; transition: var(--transition); }
+    .sov-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 10px 32px rgba(201,168,76,0.15); }
+    .sov-icon { font-size: 24px; color: var(--gold); margin-bottom: 10px; }
+    .sov-card span { font-size: 13.5px; font-weight: 600; color: var(--navy); font-family: 'Inter', sans-serif; display: block; }
+
+    .service-block { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; padding: 80px 0; border-bottom: 1px solid var(--grey-100); scroll-margin-top: 80px; }
+    .service-block:last-of-type { border-bottom: none; }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+    .service-block-img { border-radius: 16px; overflow: hidden; }
+    .service-block-img img { width: 100%; height: 380px; object-fit: cover; border-radius: 16px; display: block; }
+    .service-block-img.icon-only { background: linear-gradient(135deg, var(--navy), var(--navy-light)); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 16px; height: 380px; }
+    .service-block-img.icon-only i { font-size: 80px; color: rgba(201,168,76,0.3); }
+    .service-block-img.icon-only span { font-size: 14px; color: rgba(255,255,255,0.5); font-family: 'Inter', sans-serif; }
+    .service-block-content .label { margin-bottom: 10px; }
+    .service-block-content h2 { font-size: clamp(1.625rem, 3vw, 2.25rem); color: var(--navy); line-height: 1.25; margin-bottom: 16px; }
+    .service-block-content p { font-size: 15px; color: var(--grey-500); line-height: 1.75; margin-bottom: 20px; }
+    .service-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .service-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; color: var(--grey-700); }
+    .service-features li i { color: var(--gold); margin-top: 3px; font-size: 13px; flex-shrink: 0; }
+
+    .cta-strip { background: linear-gradient(135deg, var(--navy), var(--navy-light)); border-radius: 20px; padding: 64px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; margin-top: 48px; }
+    .cta-strip h2 { font-size: clamp(1.5rem, 3vw, 2.25rem); color: var(--white); flex: 1; min-width: 260px; }
+    .cta-strip-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    @media (max-width: 1024px) {
+      .services-overview { grid-template-columns: repeat(2, 1fr); }
+      .service-block { grid-template-columns: 1fr; gap: 32px; }
+      .service-block.reverse { direction: ltr; }
+      .service-block-img { display: none; }
+    }
+    @media (max-width: 640px) {
+      .services-overview { grid-template-columns: 1fr 1fr; }
+      .cta-strip { padding: 40px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="topbar-info">
+        <div class="topbar-item"><i class="fas fa-clock"></i> Mon–Fri: 07:30 – 19:00</div>
+        <div class="topbar-item"><i class="fas fa-map-marker-alt"></i> Goldsmith Hall, New York, NY 90210</div>
+        <div class="topbar-item"><i class="fas fa-phone"></i> +1 (401) 992-4872</div>
+      </div>
+      <div class="topbar-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="assets/images/mark.svg" alt="" width="40" height="40"><div class="logo-wordmark"><span class="logo-name">CLARENDON</span><span class="logo-sub">CAPITAL</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li>
+          <a href="services.html" class="active">Services <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="#reit">Real Estate</a></li>
+            <li><a href="#financial-planning">Financial Planning</a></li>
+            <li><a href="#bonds">Bonds</a></li>
+            <li><a href="#commodities">Commodities</a></li>
+            <li><a href="#trusts">Investment Trusts</a></li>
+            <li><a href="#mutual-funds">Mutual Funds</a></li>
+            <li><a href="#retirement">Retirement</a></li>
+            <li><a href="#stocks">Stocks &amp; Trades</a></li>
+          </ul>
+        </li>
+        <li><a href="plans.html">Plans</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="dashboard/signup.html" class="btn btn-gold btn-sm">Open Account</a>
+        <a href="dashboard/signin.html" style="font-size:14px;font-weight:500;color:var(--grey-700);padding:10px 12px;">Sign In</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navClose"><i class="fas fa-times"></i></button>
+  <ul class="nav-mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-cta">
+    <a href="dashboard/signup.html" class="btn btn-gold" style="justify-content:center;">Open Account</a>
+    <a href="dashboard/signin.html" class="btn btn-outline" style="justify-content:center;">Sign In</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <span class="label">What We Offer</span>
+      <h1>Our Services</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Services</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;" class="reveal">
+      <span class="label">Jump To</span>
+      <h2 class="section-title">All Investment Services</h2>
+    </div>
+    <div class="services-overview reveal">
+      <a href="#reit" class="sov-card"><div class="sov-icon"><i class="fas fa-home"></i></div><span>Real Estate</span></a>
+      <a href="#financial-planning" class="sov-card"><div class="sov-icon"><i class="fas fa-chart-pie"></i></div><span>Financial Planning</span></a>
+      <a href="#bonds" class="sov-card"><div class="sov-icon"><i class="fas fa-file-invoice-dollar"></i></div><span>Bonds</span></a>
+      <a href="#commodities" class="sov-card"><div class="sov-icon"><i class="fas fa-oil-can"></i></div><span>Commodities</span></a>
+      <a href="#trusts" class="sov-card"><div class="sov-icon"><i class="fas fa-landmark"></i></div><span>Investment Trusts</span></a>
+      <a href="#mutual-funds" class="sov-card"><div class="sov-icon"><i class="fas fa-layer-group"></i></div><span>Mutual Funds</span></a>
+      <a href="#retirement" class="sov-card"><div class="sov-icon"><i class="fas fa-piggy-bank"></i></div><span>Retirement</span></a>
+      <a href="#stocks" class="sov-card"><div class="sov-icon"><i class="fas fa-exchange-alt"></i></div><span>Stocks &amp; Trades</span></a>
+    </div>
+
+    <div id="reit" class="service-block reveal">
+      <div class="service-block-img">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80" alt="Real Estate Investment" />
+      </div>
+      <div class="service-block-content">
+        <span class="label">01 / Real Estate</span>
+        <h2>Real Estate Investment (REIT)</h2>
+        <p>We operate under the Real Estate Investment Trust framework, offering clients curated access to residential, commercial, and industrial property markets. Our portfolio management team actively identifies undervalued assets and growth opportunities across key global markets.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Residential &amp; commercial property portfolios</li>
+          <li><i class="fas fa-check-circle"></i> Opportunistic development and redevelopment projects</li>
+          <li><i class="fas fa-check-circle"></i> Market inefficiency exploitation for alpha generation</li>
+          <li><i class="fas fa-check-circle"></i> Quarterly reporting and full transparency</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="financial-planning" class="service-block reverse reveal">
+      <div class="service-block-img">
+        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="Financial Planning" />
+      </div>
+      <div class="service-block-content">
+        <span class="label">02 / Financial Planning</span>
+        <h2>Personalized Financial Planning</h2>
+        <p>Our financial planning service goes beyond generic advice. We work one-on-one with each client to understand their complete financial picture — income, goals, liabilities, risk tolerance — and craft a bespoke roadmap to wealth.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Comprehensive financial health assessments</li>
+          <li><i class="fas fa-check-circle"></i> Goal-based investment strategies</li>
+          <li><i class="fas fa-check-circle"></i> Tax optimization and estate planning guidance</li>
+          <li><i class="fas fa-check-circle"></i> Regular portfolio reviews and rebalancing</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="bonds" class="service-block reveal">
+      <div class="service-block-img icon-only">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <span>Fixed Income &amp; Bonds</span>
+      </div>
+      <div class="service-block-content">
+        <span class="label">03 / Bonds</span>
+        <h2>Fixed Income &amp; Bond Investments</h2>
+        <p>Bonds are a cornerstone of any balanced portfolio. We offer access to government bonds, corporate bonds, and emerging market fixed income instruments — carefully selected for credit quality and yield optimization.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Government and corporate bond selection</li>
+          <li><i class="fas fa-check-circle"></i> Credit quality screening and risk assessment</li>
+          <li><i class="fas fa-check-circle"></i> Fixed income ladder strategies</li>
+          <li><i class="fas fa-check-circle"></i> Emerging market bond access</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="commodities" class="service-block reverse reveal">
+      <div class="service-block-img icon-only">
+        <i class="fas fa-oil-can"></i>
+        <span>Commodities Trading</span>
+      </div>
+      <div class="service-block-content">
+        <span class="label">04 / Commodities</span>
+        <h2>Commodities &amp; Energy Markets</h2>
+        <p>Commodities offer powerful diversification and inflation protection. We provide exposure to precious metals (gold, silver), energy (oil, natural gas), and agricultural commodities through managed accounts and CFD instruments.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Precious metals: gold, silver, platinum</li>
+          <li><i class="fas fa-check-circle"></i> Energy: crude oil, natural gas, renewables</li>
+          <li><i class="fas fa-check-circle"></i> Agricultural commodity exposure</li>
+          <li><i class="fas fa-check-circle"></i> CFD-based access with managed risk</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="trusts" class="service-block reveal">
+      <div class="service-block-img icon-only">
+        <i class="fas fa-landmark"></i>
+        <span>Investment Trusts</span>
+      </div>
+      <div class="service-block-content">
+        <span class="label">05 / Investment Trusts</span>
+        <h2>Investment Trust Portfolios</h2>
+        <p>Investment trusts offer a proven structure for long-term wealth accumulation. Our trust products pool investor capital to access diversified portfolios of assets managed by our professional Investment Committee.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Professionally managed trust structures</li>
+          <li><i class="fas fa-check-circle"></i> Diversified across asset classes and geographies</li>
+          <li><i class="fas fa-check-circle"></i> Regular distribution of income returns</li>
+          <li><i class="fas fa-check-circle"></i> External audits and full transparency</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="mutual-funds" class="service-block reverse reveal">
+      <div class="service-block-img icon-only">
+        <i class="fas fa-layer-group"></i>
+        <span>Mutual Funds</span>
+      </div>
+      <div class="service-block-content">
+        <span class="label">06 / Mutual Funds</span>
+        <h2>Managed Mutual Fund Access</h2>
+        <p>We provide access to a curated selection of top-performing mutual funds spanning domestic equities, international stocks, fixed income, and balanced funds — with ongoing monitoring and rebalancing guidance.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Domestic and international equity funds</li>
+          <li><i class="fas fa-check-circle"></i> Balanced and income-focused fund options</li>
+          <li><i class="fas fa-check-circle"></i> Sector-specific fund selection</li>
+          <li><i class="fas fa-check-circle"></i> Performance monitoring and fund switching</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="retirement" class="service-block reveal">
+      <div class="service-block-img icon-only">
+        <i class="fas fa-piggy-bank"></i>
+        <span>Retirement Planning</span>
+      </div>
+      <div class="service-block-content">
+        <span class="label">07 / Retirement</span>
+        <h2>Retirement &amp; Long-Term Planning</h2>
+        <p>Retirement requires a different mindset — we specialize in building stable, income-generating portfolios that protect and grow capital over the long term. Our retirement plans are structured to provide peace of mind for your future.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> IRA-equivalent structured retirement accounts</li>
+          <li><i class="fas fa-check-circle"></i> Long-term capital preservation strategies</li>
+          <li><i class="fas fa-check-circle"></i> Income distribution planning</li>
+          <li><i class="fas fa-check-circle"></i> Estate and inheritance planning guidance</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div id="stocks" class="service-block reverse reveal">
+      <div class="service-block-img">
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&q=80" alt="Stocks and trading" />
+      </div>
+      <div class="service-block-content">
+        <span class="label">08 / Stocks &amp; Trades</span>
+        <h2>Global Equities, Forex &amp; Crypto</h2>
+        <p>Our trading services provide access to global stock markets, Forex currency pairs, CFDs on indices, and cryptocurrency assets — all with professional risk management, real-time market intelligence, and expert guidance.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check-circle"></i> Global equity market access (NYSE, LSE, NASDAQ, etc.)</li>
+          <li><i class="fas fa-check-circle"></i> Forex and CFD trading with managed risk</li>
+          <li><i class="fas fa-check-circle"></i> Cryptocurrency portfolio exposure</li>
+          <li><i class="fas fa-check-circle"></i> Real-time market data and live charts</li>
+        </ul>
+        <a href="plans.html" class="btn btn-gold btn-sm"><i class="fas fa-arrow-right"></i> View Plans</a>
+      </div>
+    </div>
+
+    <div class="cta-strip reveal">
+      <h2>Ready to invest? Choose the plan that works for you.</h2>
+      <div class="cta-strip-btns">
+        <a href="plans.html" class="btn btn-gold"><i class="fas fa-gem"></i> View Plans</a>
+        <a href="contact.html" class="btn btn-outline"><i class="fas fa-phone"></i> Talk to Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="assets/images/mark.svg" alt="" width="40" height="40"><div class="logo-wordmark"><span class="logo-name">CLARENDON</span><span class="logo-sub">CAPITAL</span></div></a>
+        <p>We provide expert financial and real estate investment advice to individuals and businesses globally.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="plans.html">Plans</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#reit">Real Estate</a></li>
+          <li><a href="#trusts">Investments</a></li>
+          <li><a href="#retirement">Retirement</a></li>
+          <li><a href="#stocks">Stocks</a></li>
+          <li><a href="#commodities">Commodities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Get the latest market insights delivered to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Clarendon Capital. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+  const navToggle = document.getElementById('navToggle');
+  const navMobile = document.getElementById('navMobile');
+  const overlay = document.getElementById('overlay');
+  const navClose = document.getElementById('navClose');
+  function openNav() { navMobile.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeNav() { navMobile.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  navToggle.addEventListener('click', openNav);
+  navClose.addEventListener('click', closeNav);
+  overlay.addEventListener('click', closeNav);
+  const revealObserver = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In — Clarendon Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0B1F3A; --navy-mid: #162d52; --navy-light: #1e3a6a;
+      --gold: #C9A84C; --gold-light: #e8c87a; --gold-pale: #f5e8c0;
+      --white: #ffffff; --off-white: #F8F9FB;
+      --grey-100: #F1F3F6; --grey-300: #D1D5DB; --grey-500: #6B7280; --grey-700: #374151;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html, body { height: 100%; }
+    body { font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    .auth-left {
+      width: 42%;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-left::before {
+      content: '';
+      position: absolute;
+      top: -40%; left: -20%;
+      width: 80%; height: 80%;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .auth-left::after {
+      content: '';
+      position: absolute;
+      bottom: -20%; right: -20%;
+      width: 60%; height: 60%;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .auth-logo { display: flex; align-items: center; gap: 10px; z-index: 1; }
+    .auth-logo img { display: block; }
+    .logo-wordmark { display: flex; flex-direction: column; line-height: 1; }
+    .logo-name { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--navy); line-height: 1; }
+    .logo-sub { font-family: 'Inter', sans-serif; font-size: 8.5px; font-weight: 700; color: var(--gold); letter-spacing: 3.5px; text-transform: uppercase; margin-top: 4px; }
+    .auth-logo .logo-name { color: var(--white); }
+    .auth-left-content { z-index: 1; }
+    .auth-left-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.625rem, 3vw, 2.25rem); color: var(--white); line-height: 1.25; margin-bottom: 16px; }
+    .auth-left-content p { font-size: 14.5px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 32px; }
+    .trust-items { display: flex; flex-direction: column; gap: 14px; }
+    .trust-item { display: flex; align-items: center; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.8); }
+    .trust-icon { width: 36px; height: 36px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+    .auth-left-bottom { z-index: 1; }
+    .auth-left-bottom p { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+    .auth-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 40px;
+      background: var(--off-white);
+    }
+    .auth-form-wrap { width: 100%; max-width: 420px; }
+    .auth-form-wrap h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin-bottom: 6px; }
+    .auth-form-wrap > p { font-size: 14.5px; color: var(--grey-500); margin-bottom: 32px; }
+    .auth-form-wrap > p a { color: var(--gold); font-weight: 600; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--grey-700); }
+    .input-wrap { position: relative; }
+    .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--grey-500); font-size: 14px; pointer-events: none; }
+    .input-wrap input { width: 100%; padding: 13px 16px 13px 40px; border: 1.5px solid var(--grey-300); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14.5px; color: var(--grey-700); background: var(--white); outline: none; transition: var(--transition); }
+    .input-wrap input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    .input-wrap .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--grey-500); cursor: pointer; font-size: 14px; background: none; border: none; }
+
+    .form-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .remember { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--grey-700); cursor: pointer; }
+    .remember input[type=checkbox] { accent-color: var(--gold); width: 15px; height: 15px; }
+    .forgot { font-size: 13.5px; color: var(--gold); font-weight: 600; }
+    .forgot:hover { color: var(--gold-light); }
+
+    .btn-submit { width: 100%; padding: 14px; background: var(--gold); color: var(--navy); border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.3); }
+
+    .divider { display: flex; align-items: center; gap: 12px; margin: 24px 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--grey-300); }
+    .divider-text { font-size: 13px; color: var(--grey-500); }
+
+    .social-btns { display: flex; gap: 12px; }
+    .social-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px; border: 1.5px solid var(--grey-300); border-radius: 8px; font-size: 13.5px; font-weight: 500; color: var(--grey-700); background: var(--white); cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; }
+    .social-btn:hover { border-color: var(--grey-500); background: var(--grey-100); }
+    .social-btn img { width: 18px; height: 18px; }
+
+    .register-link { text-align: center; margin-top: 24px; font-size: 14px; color: var(--grey-500); }
+    .register-link a { color: var(--gold); font-weight: 600; }
+
+    .error-msg { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 12px 16px; font-size: 13.5px; color: #dc2626; display: none; margin-bottom: 16px; align-items: center; gap: 8px; }
+    .error-msg.show { display: flex; }
+
+    @media (max-width: 768px) {
+      .auth-left { display: none; }
+      .auth-right { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-left">
+  <a href="../index.html" class="auth-logo">
+      <img src="../assets/images/mark.svg" alt="" width="38" height="38">
+      <div class="logo-wordmark">
+        <span class="logo-name">CLARENDON</span>
+        <span class="logo-sub">CAPITAL</span>
+      </div>
+    </a>
+  <div class="auth-left-content">
+    <h2>Welcome Back to Your Investment Dashboard</h2>
+    <p>Manage your real estate portfolio, track returns, and fund your account — all in one secure place.</p>
+    <div class="trust-items">
+      <div class="trust-item"><div class="trust-icon"><i class="fas fa-shield-alt"></i></div> Bank-grade 256-bit SSL encryption</div>
+      <div class="trust-item"><div class="trust-icon"><i class="fas fa-lock"></i></div> Licensed custodian asset protection</div>
+      <div class="trust-item"><div class="trust-icon"><i class="fas fa-chart-bar"></i></div> Real-time portfolio monitoring</div>
+      <div class="trust-item"><div class="trust-icon"><i class="fas fa-headset"></i></div> Dedicated adviser support</div>
+    </div>
+  </div>
+  <div class="auth-left-bottom">
+    <p>&copy; 2026 Clarendon Capital. All rights reserved.</p>
+  </div>
+</div>
+
+<div class="auth-right">
+  <div class="auth-form-wrap">
+    <h1>Sign In</h1>
+    <p>New here? <a href="signup.html">Create a free account</a></p>
+
+    <div class="error-msg" id="errorMsg">
+      <i class="fas fa-exclamation-circle"></i>
+      <span>Invalid email or password. Please try again.</span>
+    </div>
+
+    <form id="loginForm" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <i class="fas fa-envelope"></i>
+          <input id="email" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input id="password" type="password" placeholder="Enter your password" required />
+          <button type="button" class="toggle-pw" onclick="togglePw()"><i class="fas fa-eye" id="eyeIcon"></i></button>
+        </div>
+      </div>
+      <div class="form-options">
+        <label class="remember">
+          <input type="checkbox" /> Remember me
+        </label>
+        <a href="#" class="forgot">Forgot password?</a>
+      </div>
+      <button type="submit" class="btn-submit">
+        <i class="fas fa-sign-in-alt"></i> Sign In
+      </button>
+    </form>
+
+    <div class="divider"><div class="divider-line"></div><span class="divider-text">or continue with</span><div class="divider-line"></div></div>
+    <div class="social-btns">
+      <button class="social-btn"><img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" /> Google</button>
+      <button class="social-btn"><i class="fab fa-apple" style="font-size:16px;"></i> Apple</button>
+    </div>
+
+    <div class="register-link">Don't have an account? <a href="signup.html">Register now</a></div>
+  </div>
+</div>
+
+<script>
+  function togglePw() {
+    const pw = document.getElementById('password');
+    const icon = document.getElementById('eyeIcon');
+    if (pw.type === 'password') { pw.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+    else { pw.type = 'password'; icon.className = 'fas fa-eye'; }
+  }
+
+  function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const pw = document.getElementById('password').value;
+    if (email && pw) {
+      window.location.href = 'index.html';
+    } else {
+      document.getElementById('errorMsg').classList.add('show');
+    }
+  }
+</script>
+</body>
+</html>

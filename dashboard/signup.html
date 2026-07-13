@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Account — Clarendon Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0B1F3A; --navy-mid: #162d52; --navy-light: #1e3a6a;
+      --gold: #C9A84C; --gold-light: #e8c87a; --gold-pale: #f5e8c0;
+      --white: #ffffff; --off-white: #F8F9FB;
+      --grey-100: #F1F3F6; --grey-300: #D1D5DB; --grey-500: #6B7280; --grey-700: #374151;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html, body { min-height: 100%; }
+    body { font-family: 'Inter', sans-serif; display: flex; min-height: 100vh; }
+    a { text-decoration: none; color: inherit; }
+
+    .auth-left {
+      width: 38%;
+      background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+    .auth-left::before { content: ''; position: absolute; top: -40%; left: -20%; width: 80%; height: 80%; background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%); pointer-events: none; }
+    .auth-left::after { content: ''; position: absolute; bottom: -20%; right: -20%; width: 60%; height: 60%; background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%); pointer-events: none; }
+    .auth-logo { display: flex; align-items: center; gap: 10px; z-index: 1; }
+    .auth-logo img { display: block; }
+    .auth-logo .logo-name { color: var(--white); }
+    .auth-left-content { z-index: 1; }
+    .auth-left-content h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--white); line-height: 1.3; margin-bottom: 14px; }
+    .auth-left-content p { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.7; margin-bottom: 28px; }
+    .benefits { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .benefit-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13.5px; color: rgba(255,255,255,0.85); }
+    .benefit-icon { width: 32px; height: 32px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+    .stat-chips { display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap; }
+    .stat-chip { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; padding: 8px 16px; }
+    .stat-chip span { font-family: 'Playfair Display', serif; font-size: 1.125rem; font-weight: 700; color: var(--gold); display: block; line-height: 1; }
+    .stat-chip small { font-size: 11px; color: rgba(255,255,255,0.5); }
+    .auth-left-bottom { z-index: 1; }
+    .auth-left-bottom p { font-size: 12px; color: rgba(255,255,255,0.3); }
+
+    .auth-right { flex: 1; display: flex; align-items: flex-start; justify-content: center; padding: 48px 40px; background: var(--off-white); overflow-y: auto; }
+    .auth-form-wrap { width: 100%; max-width: 480px; padding: 8px 0 40px; }
+    .auth-form-wrap h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--navy); margin-bottom: 6px; }
+    .auth-form-wrap > p { font-size: 14.5px; color: var(--grey-500); margin-bottom: 28px; }
+    .auth-form-wrap > p a { color: var(--gold); font-weight: 600; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--grey-700); }
+    .input-wrap { position: relative; }
+    .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--grey-500); font-size: 14px; pointer-events: none; }
+    .input-wrap input, .input-wrap select { width: 100%; padding: 13px 16px 13px 40px; border: 1.5px solid var(--grey-300); border-radius: 8px; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--grey-700); background: var(--white); outline: none; transition: var(--transition); -webkit-appearance: none; }
+    .input-wrap input:focus, .input-wrap select:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    .input-wrap .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--grey-500); cursor: pointer; font-size: 14px; background: none; border: none; }
+
+    .pw-strength { height: 4px; border-radius: 2px; background: var(--grey-100); margin-top: 8px; overflow: hidden; }
+    .pw-strength-bar { height: 100%; border-radius: 2px; width: 0%; transition: width 0.3s, background 0.3s; }
+    .pw-strength-text { font-size: 11px; color: var(--grey-500); margin-top: 4px; }
+
+    .terms-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 20px; }
+    .terms-check input[type=checkbox] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+    .terms-check span { font-size: 13px; color: var(--grey-500); line-height: 1.5; }
+    .terms-check a { color: var(--gold); font-weight: 600; }
+
+    .btn-submit { width: 100%; padding: 14px; background: var(--gold); color: var(--navy); border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(201,168,76,0.3); }
+
+    .login-link { text-align: center; margin-top: 20px; font-size: 14px; color: var(--grey-500); }
+    .login-link a { color: var(--gold); font-weight: 600; }
+
+    .step-indicator { display: flex; gap: 8px; margin-bottom: 28px; }
+    .step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grey-300); transition: var(--transition); }
+    .step-dot.active { background: var(--gold); width: 24px; border-radius: 4px; }
+
+    @media (max-width: 768px) {
+      .auth-left { display: none; }
+      .auth-right { padding: 32px 20px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-left">
+  <a href="../index.html" class="auth-logo">
+      <img src="../assets/images/mark.svg" alt="" width="38" height="38">
+      <div class="logo-wordmark">
+        <span class="logo-name">CLARENDON</span>
+        <span class="logo-sub">CAPITAL</span>
+      </div>
+    </a>
+  <div class="auth-left-content">
+    <h2>Start Your Investment Journey Today</h2>
+    <p>Join hundreds of investors growing their wealth through expert-managed real estate and financial portfolios.</p>
+    <ul class="benefits">
+      <li class="benefit-item"><div class="benefit-icon"><i class="fas fa-user-shield"></i></div>Identity-verified, secure accounts with KYC compliance</li>
+      <li class="benefit-item"><div class="benefit-icon"><i class="fas fa-bitcoin"></i></div>Fund instantly with Bitcoin, Ethereum, USDT, or USDC</li>
+      <li class="benefit-item"><div class="benefit-icon"><i class="fas fa-chart-area"></i></div>Real-time portfolio tracking dashboard</li>
+      <li class="benefit-item"><div class="benefit-icon"><i class="fas fa-hand-holding-usd"></i></div>Plans starting from just $500 minimum deposit</li>
+      <li class="benefit-item"><div class="benefit-icon"><i class="fas fa-headset"></i></div>Dedicated financial adviser assigned to your account</li>
+    </ul>
+    <div class="stat-chips">
+      <div class="stat-chip"><span>$370M+</span><small>Managed</small></div>
+      <div class="stat-chip"><span>408+</span><small>Projects</small></div>
+      <div class="stat-chip"><span>100%</span><small>Satisfaction</small></div>
+    </div>
+  </div>
+  <div class="auth-left-bottom">
+    <p>&copy; 2026 Clarendon Capital. All rights reserved.</p>
+  </div>
+</div>
+
+<div class="auth-right">
+  <div class="auth-form-wrap">
+    <h1>Create Account</h1>
+    <p>Already have an account? <a href="signin.html">Sign in here</a></p>
+
+    <form id="regForm" onsubmit="handleRegister(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <div class="input-wrap">
+            <i class="fas fa-user"></i>
+            <input id="fname" type="text" placeholder="John" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <div class="input-wrap">
+            <i class="fas fa-user"></i>
+            <input id="lname" type="text" placeholder="Doe" required />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrap">
+          <i class="fas fa-envelope"></i>
+          <input id="email" type="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <div class="input-wrap">
+            <i class="fas fa-phone"></i>
+            <input id="phone" type="tel" placeholder="+1 (555) 000-0000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="country">Country</label>
+          <div class="input-wrap">
+            <i class="fas fa-globe"></i>
+            <select id="country" required>
+              <option value="">Select country...</option>
+              <option>United States</option>
+              <option>United Kingdom</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>Germany</option>
+              <option>France</option>
+              <option>Netherlands</option>
+              <option>Singapore</option>
+              <option>United Arab Emirates</option>
+              <option>South Africa</option>
+              <option>Nigeria</option>
+              <option>Ghana</option>
+              <option>Kenya</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input id="password" type="password" placeholder="Create a strong password" required oninput="checkStrength(this.value)" />
+          <button type="button" class="toggle-pw" onclick="togglePw('password', 'eye1')"><i class="fas fa-eye" id="eye1"></i></button>
+        </div>
+        <div class="pw-strength"><div class="pw-strength-bar" id="pwBar"></div></div>
+        <div class="pw-strength-text" id="pwText">Use 8+ characters with letters, numbers &amp; symbols</div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm">Confirm Password</label>
+        <div class="input-wrap">
+          <i class="fas fa-lock"></i>
+          <input id="confirm" type="password" placeholder="Repeat your password" required />
+          <button type="button" class="toggle-pw" onclick="togglePw('confirm', 'eye2')"><i class="fas fa-eye" id="eye2"></i></button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="referral">Referral Code <span style="font-weight:400;color:var(--grey-500);">(optional)</span></label>
+        <div class="input-wrap">
+          <i class="fas fa-tag"></i>
+          <input id="referral" type="text" placeholder="Enter referral code" />
+        </div>
+      </div>
+
+      <div class="terms-check">
+        <input type="checkbox" id="terms" required />
+        <span>I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>. I understand that investments carry risk and past performance does not guarantee future results.</span>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <i class="fas fa-user-plus"></i> Create Free Account
+      </button>
+    </form>
+
+    <div class="login-link">Already have an account? <a href="signin.html">Sign in</a></div>
+  </div>
+</div>
+
+<script>
+  function togglePw(id, iconId) {
+    const pw = document.getElementById(id), icon = document.getElementById(iconId);
+    if (pw.type === 'password') { pw.type = 'text'; icon.className = 'fas fa-eye-slash'; }
+    else { pw.type = 'password'; icon.className = 'fas fa-eye'; }
+  }
+
+  function checkStrength(val) {
+    const bar = document.getElementById('pwBar'), text = document.getElementById('pwText');
+    let score = 0;
+    if (val.length >= 8) score++;
+    if (/[A-Z]/.test(val)) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^A-Za-z0-9]/.test(val)) score++;
+    const levels = [
+      { w: '0%', c: '', t: 'Use 8+ characters with letters, numbers & symbols' },
+      { w: '25%', c: '#ef4444', t: 'Weak — add uppercase letters' },
+      { w: '50%', c: '#f97316', t: 'Fair — add numbers' },
+      { w: '75%', c: '#eab308', t: 'Good — add special characters' },
+      { w: '100%', c: '#22c55e', t: 'Strong password!' },
+    ];
+    const l = levels[score];
+    bar.style.width = l.w; bar.style.background = l.c; text.textContent = l.t;
+    text.style.color = l.c || 'var(--grey-500)';
+  }
+
+  function handleRegister(e) {
+    e.preventDefault();
+    const pw = document.getElementById('password').value;
+    const confirm = document.getElementById('confirm').value;
+    if (pw !== confirm) { alert('Passwords do not match.'); return; }
+    window.location.href = 'index.html';
+  }
+</script>
+</body>
+</html>

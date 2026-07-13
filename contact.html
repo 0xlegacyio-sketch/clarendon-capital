@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — Clarendon Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/shared.css" />
+  <style>
+    .contact-main { display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start; }
+    .contact-info-col h2 { font-size: 2rem; color: var(--navy); margin-bottom: 14px; }
+    .contact-info-col > p { font-size: 15px; color: var(--grey-500); line-height: 1.7; margin-bottom: 36px; }
+    .contact-items { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-item-icon { width: 48px; height: 48px; flex-shrink: 0; background: var(--gold-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 18px; }
+    .contact-item-text { font-size: 14px; }
+    .contact-item-text strong { display: block; color: var(--navy); font-weight: 600; margin-bottom: 3px; font-family: 'Inter', sans-serif; }
+    .contact-item-text span { color: var(--grey-500); line-height: 1.55; display: block; }
+    .contact-form-box { background: var(--white); border-radius: 16px; padding: 48px; box-shadow: 0 8px 48px rgba(0,0,0,0.07); }
+    .contact-form-box h3 { font-size: 1.375rem; color: var(--navy); margin-bottom: 28px; }
+    .form-note { font-size: 12px; color: var(--grey-500); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; }
+    .form-note i { color: var(--gold); }
+    .form-success { display: none; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 20px 24px; font-size: 15px; color: #166534; margin-top: 16px; align-items: center; gap: 12px; }
+    .form-success.show { display: flex; }
+
+    .methods-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+    .method-card { background: var(--navy); border-radius: 12px; padding: 36px 28px; text-align: center; }
+    .method-icon { font-size: 28px; color: var(--gold); margin-bottom: 16px; }
+    .method-card h3 { font-size: 1.0625rem; color: var(--white); margin-bottom: 8px; }
+    .method-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+    .method-card a { color: var(--gold); display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600; font-family: 'Inter', sans-serif; transition: var(--transition); }
+    .method-card a:hover { color: var(--gold-light); }
+
+    .map-placeholder { background: var(--grey-100); border-radius: 16px; height: 300px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 12px; margin-top: 64px; color: var(--grey-500); }
+    .map-placeholder i { font-size: 40px; color: var(--gold); }
+    .map-placeholder p { font-size: 14px; }
+
+    @media (max-width: 1024px) {
+      .contact-main { grid-template-columns: 1fr; }
+      .methods-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .contact-form-box { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="topbar-info">
+        <div class="topbar-item"><i class="fas fa-clock"></i> Mon–Fri: 07:30 – 19:00</div>
+        <div class="topbar-item"><i class="fas fa-map-marker-alt"></i> Goldsmith Hall, New York, NY 90210</div>
+        <div class="topbar-item"><i class="fas fa-phone"></i> +1 (401) 992-4872</div>
+      </div>
+      <div class="topbar-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="assets/images/mark.svg" alt="" width="40" height="40"><div class="logo-wordmark"><span class="logo-name">CLARENDON</span><span class="logo-sub">CAPITAL</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li>
+          <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="services.html#reit">Real Estate</a></li>
+            <li><a href="services.html#financial-planning">Financial Planning</a></li>
+            <li><a href="services.html#bonds">Bonds</a></li>
+            <li><a href="services.html#commodities">Commodities</a></li>
+            <li><a href="services.html#trusts">Investment Trusts</a></li>
+            <li><a href="services.html#mutual-funds">Mutual Funds</a></li>
+            <li><a href="services.html#retirement">Retirement</a></li>
+            <li><a href="services.html#stocks">Stocks &amp; Trades</a></li>
+          </ul>
+        </li>
+        <li><a href="plans.html">Plans</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="dashboard/signup.html" class="btn btn-gold btn-sm">Open Account</a>
+        <a href="dashboard/signin.html" style="font-size:14px;font-weight:500;color:var(--grey-700);padding:10px 12px;">Sign In</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navClose"><i class="fas fa-times"></i></button>
+  <ul class="nav-mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-cta">
+    <a href="dashboard/signup.html" class="btn btn-gold" style="justify-content:center;">Open Account</a>
+    <a href="dashboard/signin.html" class="btn btn-outline" style="justify-content:center;">Sign In</a>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <span class="label">Get in Touch</span>
+      <h1>Contact Us</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Contact</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-main">
+      <div class="contact-info-col reveal">
+        <span class="label">Reach Out</span>
+        <h2>We'd Love to Hear From You</h2>
+        <p>Whether you have questions about our investment plans, need advice, or are ready to open an account — our team is here to help.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-item-text">
+              <strong>Office Hours</strong>
+              <span>Monday – Friday: 07:30 – 19:00<br>Weekend: Closed</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-item-text">
+              <strong>Our Address</strong>
+              <span>Goldsmith Hall<br>New York, NY 90210</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              <span>+1 (401) 992-4872</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>info@clarendoncapital.com<br>support@clarendoncapital.com</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-headset"></i></div>
+            <div class="contact-item-text">
+              <strong>Live Support</strong>
+              <span>Available Mon–Fri during office hours via the chat icon on your dashboard.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-box reveal reveal-delay-2">
+        <h3>Send Us a Message</h3>
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input id="fname" type="text" placeholder="John" required />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input id="lname" type="text" placeholder="Doe" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input id="email" type="email" placeholder="john@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="topic">Topic</label>
+            <select id="topic" required>
+              <option value="">Select a topic...</option>
+              <option>Investment Opportunities</option>
+              <option>Personal Finance</option>
+              <option>Stock Trading</option>
+              <option>Retirement Planning</option>
+              <option>Real Estate</option>
+              <option>Account &amp; Billing</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Tell us how we can help..." required></textarea>
+          </div>
+          <p class="form-note"><i class="fas fa-lock"></i> Your details are kept strictly confidential as per our Privacy Policy.</p>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;padding:15px;">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+          <div class="form-success" id="formSuccess">
+            <i class="fas fa-check-circle" style="font-size:20px;flex-shrink:0;"></i>
+            <span>Thank you! Your message has been received. We'll be in touch within one business day.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="methods-grid reveal">
+      <div class="method-card">
+        <div class="method-icon"><i class="fas fa-phone-alt"></i></div>
+        <h3>Call Us</h3>
+        <p>Speak directly with one of our financial advisers during office hours.</p>
+        <a href="tel:+14019924872">+1 (401) 992-4872</a>
+      </div>
+      <div class="method-card">
+        <div class="method-icon"><i class="fas fa-envelope-open-text"></i></div>
+        <h3>Email Us</h3>
+        <p>Send us your questions any time and we'll respond within one business day.</p>
+        <a href="mailto:info@clarendoncapital.com">info@clarendoncapital.com</a>
+      </div>
+      <div class="method-card">
+        <div class="method-icon"><i class="fas fa-calendar-check"></i></div>
+        <h3>Book a Meeting</h3>
+        <p>Schedule a free 30-minute consultation with one of our investment advisers.</p>
+        <a href="dashboard/signup.html">Schedule Now →</a>
+      </div>
+    </div>
+
+    <div class="map-placeholder reveal">
+      <i class="fas fa-map-marked-alt"></i>
+      <p>Goldsmith Hall, New York, NY 90210 — <strong>Replace with an embedded Google Map</strong></p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="assets/images/mark.svg" alt="" width="40" height="40"><div class="logo-wordmark"><span class="logo-name">CLARENDON</span><span class="logo-sub">CAPITAL</span></div></a>
+        <p>We provide expert financial and real estate investment advice to individuals and businesses globally.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="plans.html">Plans</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html#reit">Real Estate</a></li>
+          <li><a href="services.html#trusts">Investments</a></li>
+          <li><a href="services.html#retirement">Retirement</a></li>
+          <li><a href="services.html#stocks">Stocks</a></li>
+          <li><a href="services.html#commodities">Commodities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Get the latest market insights delivered to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Clarendon Capital. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+  const navToggle = document.getElementById('navToggle');
+  const navMobile = document.getElementById('navMobile');
+  const overlay = document.getElementById('overlay');
+  const navClose = document.getElementById('navClose');
+  function openNav() { navMobile.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeNav() { navMobile.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  navToggle.addEventListener('click', openNav);
+  navClose.addEventListener('click', closeNav);
+  overlay.addEventListener('click', closeNav);
+  const revealObserver = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } }), { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    document.getElementById('formSuccess').classList.add('show');
+    this.querySelector('button[type=submit]').style.display = 'none';
+  });
+</script>
+</body>
+</html>

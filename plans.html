@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investment Plans — Clarendon Capital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="assets/css/shared.css" />
+  <style>
+    .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .plan-card { background: var(--white); border: 2px solid var(--grey-100); border-radius: 16px; padding: 36px 28px; position: relative; transition: var(--transition); display: flex; flex-direction: column; }
+    .plan-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(11,31,58,0.12); border-color: var(--gold-pale); }
+    .plan-card.featured { border-color: var(--gold); background: var(--navy); transform: scale(1.03); box-shadow: 0 24px 60px rgba(11,31,58,0.2); }
+    .plan-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+    .plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--gold); color: var(--navy); font-size: 11px; font-weight: 700; padding: 5px 18px; border-radius: 100px; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; font-family: 'Inter', sans-serif; }
+    .plan-icon { width: 52px; height: 52px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 20px; }
+    .plan-card:not(.featured) .plan-icon { background: var(--gold-pale); color: var(--gold); }
+    .plan-card.featured .plan-icon { background: rgba(201,168,76,0.2); color: var(--gold); }
+    .plan-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
+    .plan-card:not(.featured) .plan-name { color: var(--navy); }
+    .plan-card.featured .plan-name { color: var(--white); }
+    .plan-tagline { font-size: 13px; margin-bottom: 24px; font-family: 'Inter', sans-serif; }
+    .plan-card:not(.featured) .plan-tagline { color: var(--grey-500); }
+    .plan-card.featured .plan-tagline { color: rgba(255,255,255,0.6); }
+    .plan-price { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid; }
+    .plan-card:not(.featured) .plan-price { border-color: var(--grey-100); }
+    .plan-card.featured .plan-price { border-color: rgba(255,255,255,0.1); }
+    .plan-min { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-family: 'Inter', sans-serif; }
+    .plan-card:not(.featured) .plan-min { color: var(--grey-500); }
+    .plan-card.featured .plan-min { color: rgba(255,255,255,0.5); }
+    .plan-amount { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; line-height: 1; margin: 6px 0 2px; }
+    .plan-card:not(.featured) .plan-amount { color: var(--navy); }
+    .plan-card.featured .plan-amount { color: var(--gold); }
+    .plan-amount-note { font-size: 13px; font-family: 'Inter', sans-serif; }
+    .plan-card:not(.featured) .plan-amount-note { color: var(--grey-500); }
+    .plan-card.featured .plan-amount-note { color: rgba(255,255,255,0.5); }
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; flex: 1; margin-bottom: 28px; }
+    .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; font-family: 'Inter', sans-serif; }
+    .plan-card:not(.featured) .plan-features li { color: var(--grey-700); }
+    .plan-card.featured .plan-features li { color: rgba(255,255,255,0.8); }
+    .plan-features li i { color: var(--gold); margin-top: 2px; flex-shrink: 0; font-size: 12px; }
+    .plan-card:not(.featured) .plan-features li.no i { color: var(--grey-300); }
+    .plan-card.featured .plan-features li.no i { color: rgba(255,255,255,0.2); }
+    .plan-card:not(.featured) .plan-features li.no { color: var(--grey-400); }
+    .plan-card.featured .plan-features li.no { color: rgba(255,255,255,0.3); }
+    .plan-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); border: 2px solid transparent; font-family: 'Inter', sans-serif; width: 100%; }
+    .plan-card:not(.featured) .plan-btn { background: var(--gold-pale); color: var(--navy); border-color: var(--gold-pale); }
+    .plan-card:not(.featured) .plan-btn:hover { background: var(--gold); }
+    .plan-card.featured .plan-btn { background: var(--gold); color: var(--navy); }
+    .plan-card.featured .plan-btn:hover { background: var(--gold-light); }
+
+    .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+    .how-step { text-align: center; position: relative; }
+    .how-step:not(:last-child)::after { content: ''; position: absolute; top: 28px; left: calc(50% + 36px); right: calc(-50% + 36px); height: 2px; background: linear-gradient(to right, var(--gold-pale), var(--grey-100)); }
+    .how-num { width: 56px; height: 56px; border-radius: 50%; background: var(--gold-pale); border: 3px solid var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--navy); margin: 0 auto 16px; position: relative; z-index: 1; background: var(--white); }
+    .how-step h3 { font-size: 1rem; color: var(--navy); margin-bottom: 8px; }
+    .how-step p { font-size: 13.5px; color: var(--grey-500); line-height: 1.6; }
+
+    .disclaimer { background: var(--grey-100); border-radius: 12px; padding: 24px 28px; display: flex; gap: 16px; align-items: flex-start; }
+    .disclaimer i { color: var(--gold); font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .disclaimer p { font-size: 13px; color: var(--grey-500); line-height: 1.7; }
+    .disclaimer strong { color: var(--grey-700); }
+
+    /* PAYMENT MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(11,31,58,0.75); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: var(--white); border-radius: 20px; width: 100%; max-width: 560px; max-height: 92vh; overflow-y: auto; box-shadow: 0 32px 80px rgba(0,0,0,0.25); transform: translateY(20px); transition: transform 0.3s; }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header { padding: 28px 32px 0; display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-size: 1.375rem; color: var(--navy); }
+    .modal-close { background: var(--grey-100); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 16px; color: var(--grey-500); transition: var(--transition); display: flex; align-items: center; justify-content: center; }
+    .modal-close:hover { background: var(--gold); color: var(--navy); }
+    .modal-body { padding: 24px 32px 32px; }
+
+    .plan-summary { background: var(--navy); border-radius: 12px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .plan-summary-name { font-size: 14px; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; }
+    .plan-summary-amount { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--gold); font-weight: 700; }
+
+    .crypto-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .crypto-tab { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid var(--grey-100); border-radius: 8px; cursor: pointer; transition: var(--transition); background: var(--white); font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: var(--grey-700); }
+    .crypto-tab:hover { border-color: var(--gold-pale); }
+    .crypto-tab.active { border-color: var(--gold); background: var(--gold-pale); color: var(--navy); }
+    .crypto-tab img { width: 22px; height: 22px; border-radius: 50%; }
+
+    .crypto-amount-box { background: var(--off-white); border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .crypto-amount-box .label-text { font-size: 12px; color: var(--grey-500); font-family: 'Inter', sans-serif; }
+    .crypto-amount-value { font-family: 'Playfair Display', serif; font-size: 1.375rem; color: var(--navy); font-weight: 700; }
+    .crypto-amount-note { font-size: 11px; color: var(--grey-500); font-family: 'Inter', sans-serif; }
+
+    .wallet-section { text-align: center; margin-bottom: 24px; }
+    .wallet-section .label-text { font-size: 12px; color: var(--grey-500); margin-bottom: 12px; font-family: 'Inter', sans-serif; display: block; text-transform: uppercase; letter-spacing: 1px; }
+    .qr-box { width: 160px; height: 160px; margin: 0 auto 16px; border: 3px solid var(--gold-pale); border-radius: 12px; overflow: hidden; }
+    .qr-box img { width: 100%; height: 100%; }
+    .wallet-address-box { display: flex; gap: 0; margin-top: 12px; }
+    .wallet-address-box input { flex: 1; padding: 12px 16px; background: var(--off-white); border: 1.5px solid var(--grey-100); border-right: none; border-radius: 8px 0 0 8px; font-family: monospace; font-size: 13px; color: var(--grey-700); outline: none; }
+    .copy-btn { padding: 12px 16px; background: var(--gold); border: none; border-radius: 0 8px 8px 0; cursor: pointer; color: var(--navy); font-size: 14px; transition: var(--transition); }
+    .copy-btn:hover { background: var(--gold-light); }
+    .copy-btn.copied { background: #22c55e; color: white; }
+
+    .network-badge { display: inline-block; background: var(--navy); color: var(--gold); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; font-family: 'Inter', sans-serif; margin-bottom: 16px; }
+
+    .tx-section { margin-top: 20px; }
+    .tx-section label { display: block; font-size: 13px; font-weight: 600; color: var(--grey-700); margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+    .tx-section input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--grey-300); border-radius: 8px; font-family: monospace; font-size: 13px; color: var(--grey-700); outline: none; transition: var(--transition); }
+    .tx-section input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    .tx-note { font-size: 12px; color: var(--grey-500); margin-top: 8px; font-family: 'Inter', sans-serif; line-height: 1.55; }
+    .modal-submit { width: 100%; padding: 15px; margin-top: 20px; background: var(--gold); color: var(--navy); border: none; border-radius: 8px; font-size: 15px; font-weight: 700; cursor: pointer; transition: var(--transition); font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .modal-submit:hover { background: var(--gold-light); }
+    .modal-success { display: none; text-align: center; padding: 20px 0; }
+    .modal-success.show { display: block; }
+    .modal-success i { font-size: 48px; color: #22c55e; margin-bottom: 16px; }
+    .modal-success h3 { font-size: 1.25rem; color: var(--navy); margin-bottom: 8px; }
+    .modal-success p { font-size: 14px; color: var(--grey-500); line-height: 1.6; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: var(--white); border: 1px solid var(--grey-100); border-radius: 10px; overflow: hidden; transition: var(--transition); }
+    .faq-item.open { border-color: var(--gold); box-shadow: 0 4px 24px rgba(201,168,76,0.12); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; gap: 16px; }
+    .faq-q span { font-size: 15px; font-weight: 600; color: var(--navy); font-family: 'Inter', sans-serif; }
+    .faq-q i { color: var(--gold); font-size: 14px; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-q i { transform: rotate(45deg); }
+    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+    .faq-a p { font-size: 14.5px; color: var(--grey-500); line-height: 1.75; }
+
+    @media (max-width: 1024px) {
+      .plans-grid { grid-template-columns: 1fr 1fr; }
+      .plan-card.featured { transform: none; }
+      .plan-card.featured:hover { transform: translateY(-6px); }
+      .how-grid { grid-template-columns: 1fr 1fr; }
+      .how-step::after { display: none; }
+    }
+    @media (max-width: 640px) {
+      .plans-grid { grid-template-columns: 1fr; }
+      .how-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 20px 20px 28px; }
+      .modal-header { padding: 24px 20px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="topbar-info">
+        <div class="topbar-item"><i class="fas fa-clock"></i> Mon–Fri: 07:30 – 19:00</div>
+        <div class="topbar-item"><i class="fas fa-map-marker-alt"></i> Goldsmith Hall, New York, NY 90210</div>
+        <div class="topbar-item"><i class="fas fa-phone"></i> +1 (401) 992-4872</div>
+      </div>
+      <div class="topbar-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="logo"><img src="assets/images/mark.svg" alt="" width="40" height="40"><div class="logo-wordmark"><span class="logo-name">CLARENDON</span><span class="logo-sub">CAPITAL</span></div></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li>
+          <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="services.html#reit">Real Estate</a></li>
+            <li><a href="services.html#financial-planning">Financial Planning</a></li>
+            <li><a href="services.html#bonds">Bonds</a></li>
+            <li><a href="services.html#commodities">Commodities</a></li>
+            <li><a href="services.html#trusts">Investment Trusts</a></li>
+            <li><a href="services.html#mutual-funds">Mutual Funds</a></li>
+            <li><a href="services.html#retirement">Retirement</a></li>
+            <li><a href="services.html#stocks">Stocks &amp; Trades</a></li>
+          </ul>
+        </li>
+        <li><a href="plans.html" class="active">Plans</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="dashboard/signup.html" class="btn btn-gold btn-sm">Open Account</a>
+        <a href="dashboard/signin.html" style="font-size:14px;font-weight:500;color:var(--grey-700);padding:10px 12px;">Sign In</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navClose"><i class="fas fa-times"></i></button>
+  <ul class="nav-mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-cta">
+    <a href="dashboard/signup.html" class="btn btn-gold" style="justify-content:center;">Open Account</a>
+    <a href="dashboard/signin.html" class="btn btn-outline" style="justify-content:center;">Sign In</a>
+  </div>
+</div>
+
+<!-- CRYPTO PAYMENT MODAL -->
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>Complete Your Investment</h3>
+      <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div id="paymentStep1">
+        <div class="plan-summary">
+          <div>
+            <div class="plan-summary-name" id="modalPlanName">Starter Plan</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);font-family:'Inter',sans-serif;">Minimum Deposit</div>
+          </div>
+          <div class="plan-summary-amount" id="modalPlanAmount">$500</div>
+        </div>
+
+        <p style="font-size:13.5px;color:var(--grey-500);margin-bottom:16px;font-family:'Inter',sans-serif;">Select your preferred cryptocurrency to fund your investment:</p>
+        <div class="crypto-tabs" id="cryptoTabs">
+          <button class="crypto-tab active" data-crypto="BTC" data-name="Bitcoin" data-symbol="BTC" data-network="Bitcoin Network" data-rate="0.0000167" data-address="bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq" data-color="#F7931A">
+            <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="BTC" onerror="this.style.display='none'" />BTC
+          </button>
+          <button class="crypto-tab" data-crypto="ETH" data-name="Ethereum" data-symbol="ETH" data-network="ERC-20 Network" data-rate="0.000308" data-address="0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e0" data-color="#627EEA">
+            <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="ETH" onerror="this.style.display='none'" />ETH
+          </button>
+          <button class="crypto-tab" data-crypto="USDT_TRC" data-name="USDT (TRC-20)" data-symbol="USDT" data-network="TRC-20 (Tron)" data-rate="1.001" data-address="TQkge7EkdCB7XADVsKUhkGxG5HGDXSJD7w" data-color="#26A17B">
+            <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" onerror="this.style.display='none'" />USDT TRC20
+          </button>
+          <button class="crypto-tab" data-crypto="USDT_ERC" data-name="USDT (ERC-20)" data-symbol="USDT" data-network="ERC-20 (Ethereum)" data-rate="1.001" data-address="0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e0" data-color="#26A17B">
+            <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" onerror="this.style.display='none'" />USDT ERC20
+          </button>
+          <button class="crypto-tab" data-crypto="USDC" data-name="USD Coin" data-symbol="USDC" data-network="ERC-20 (Ethereum)" data-rate="1.0" data-address="0x89205A3A3b2A69De6Dbf7f01ED13B2108B2c43e0" data-color="#2775CA">
+            <img src="https://cryptologos.cc/logos/usd-coin-usdc-logo.png" alt="USDC" onerror="this.style.display='none'" />USDC
+          </button>
+        </div>
+
+        <div class="crypto-amount-box">
+          <div>
+            <div class="label-text">Amount to send</div>
+            <div class="crypto-amount-value" id="cryptoAmountValue">0.00835 BTC</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="label-text">Network</div>
+            <div class="network-badge" id="networkBadge">Bitcoin Network</div>
+          </div>
+        </div>
+        <p class="crypto-amount-note" style="margin-bottom:20px;font-family:'Inter',sans-serif;font-size:12px;color:var(--grey-500);">⚠ Rates are approximate. Send the exact USD equivalent. Rates checked at time of deposit.</p>
+
+        <div class="wallet-section">
+          <span class="label-text">Send to this wallet address</span>
+          <div class="qr-box">
+            <img id="qrImage" src="" alt="QR Code" />
+          </div>
+          <div class="wallet-address-box">
+            <input type="text" id="walletAddress" readonly value="bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq" />
+            <button class="copy-btn" id="copyBtn" onclick="copyAddress()"><i class="fas fa-copy"></i></button>
+          </div>
+          <p style="font-size:11.5px;color:var(--grey-500);margin-top:10px;font-family:'Inter',sans-serif;">
+            ⚠ Only send the selected crypto. Sending the wrong coin may result in permanent loss.
+          </p>
+        </div>
+
+        <div class="tx-section">
+          <label for="txHash">Transaction Hash / ID (after sending)</label>
+          <input type="text" id="txHash" placeholder="0x... or txid..." />
+          <p class="tx-note">After completing your transfer, paste the transaction hash above. Our team will verify and credit your account within 1–24 hours depending on network confirmations.</p>
+        </div>
+
+        <button class="modal-submit" onclick="submitPayment()">
+          <i class="fas fa-check-circle"></i> I've Sent the Payment
+        </button>
+      </div>
+
+      <div class="modal-success" id="paymentSuccess">
+        <i class="fas fa-check-circle"></i>
+        <h3>Payment Submitted!</h3>
+        <p>Your transaction has been received and is pending verification. Our team will review and credit your account within 1–24 hours. You'll receive a confirmation email shortly.</p>
+        <a href="dashboard/index.html" class="btn btn-gold" style="margin-top:20px;justify-content:center;width:100%;">
+          <i class="fas fa-tachometer-alt"></i> Go to Dashboard
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <span class="label">Investment Options</span>
+      <h1>Investment Plans</h1>
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Plans</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px;" class="reveal">
+      <span class="label">Choose Your Tier</span>
+      <h2 class="section-title">Select an Investment Plan</h2>
+      <p class="section-sub" style="margin:0 auto;">All plans include access to your personal dashboard, portfolio tracking, and dedicated adviser support. Fund your account instantly using cryptocurrency.</p>
+    </div>
+    <div class="plans-grid">
+      <div class="plan-card reveal reveal-delay-1">
+        <div class="plan-icon"><i class="fas fa-seedling"></i></div>
+        <div class="plan-name">Starter</div>
+        <div class="plan-tagline">Begin your investment journey</div>
+        <div class="plan-price">
+          <div class="plan-min">Minimum deposit</div>
+          <div class="plan-amount">$500</div>
+          <div class="plan-amount-note">One-time or recurring</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Real estate portfolio exposure</li>
+          <li><i class="fas fa-check"></i> Basic financial planning</li>
+          <li><i class="fas fa-check"></i> Dashboard access</li>
+          <li><i class="fas fa-check"></i> Email support</li>
+          <li><i class="fas fa-check"></i> Quarterly reports</li>
+          <li class="no"><i class="fas fa-times"></i> Dedicated adviser</li>
+          <li class="no"><i class="fas fa-times"></i> Priority withdrawals</li>
+          <li class="no"><i class="fas fa-times"></i> Crypto &amp; Forex access</li>
+        </ul>
+        <button class="plan-btn" onclick="openPayment('Starter Plan', '$500+')">
+          <i class="fas fa-coins"></i> Invest Now
+        </button>
+      </div>
+
+      <div class="plan-card reveal reveal-delay-2">
+        <div class="plan-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="plan-name">Growth</div>
+        <div class="plan-tagline">Diversified wealth building</div>
+        <div class="plan-price">
+          <div class="plan-min">Minimum deposit</div>
+          <div class="plan-amount">$2,500</div>
+          <div class="plan-amount-note">One-time or recurring</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Full REIT portfolio access</li>
+          <li><i class="fas fa-check"></i> Bonds &amp; mutual funds</li>
+          <li><i class="fas fa-check"></i> Dashboard access</li>
+          <li><i class="fas fa-check"></i> Email &amp; phone support</li>
+          <li><i class="fas fa-check"></i> Monthly reports</li>
+          <li><i class="fas fa-check"></i> Dedicated adviser</li>
+          <li class="no"><i class="fas fa-times"></i> Priority withdrawals</li>
+          <li class="no"><i class="fas fa-times"></i> Crypto &amp; Forex access</li>
+        </ul>
+        <button class="plan-btn" onclick="openPayment('Growth Plan', '$2,500+')">
+          <i class="fas fa-coins"></i> Invest Now
+        </button>
+      </div>
+
+      <div class="plan-card featured reveal reveal-delay-3">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-icon"><i class="fas fa-gem"></i></div>
+        <div class="plan-name">Premium</div>
+        <div class="plan-tagline">Full diversified portfolio</div>
+        <div class="plan-price">
+          <div class="plan-min">Minimum deposit</div>
+          <div class="plan-amount">$10,000</div>
+          <div class="plan-amount-note">One-time or recurring</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Full real estate &amp; REIT access</li>
+          <li><i class="fas fa-check"></i> Stocks, bonds, commodities</li>
+          <li><i class="fas fa-check"></i> Advanced dashboard &amp; live charts</li>
+          <li><i class="fas fa-check"></i> 24/7 priority support</li>
+          <li><i class="fas fa-check"></i> Weekly portfolio reports</li>
+          <li><i class="fas fa-check"></i> Dedicated senior adviser</li>
+          <li><i class="fas fa-check"></i> Priority withdrawals (48h)</li>
+          <li><i class="fas fa-check"></i> Forex &amp; crypto access</li>
+        </ul>
+        <button class="plan-btn" onclick="openPayment('Premium Plan', '$10,000+')">
+          <i class="fas fa-coins"></i> Invest Now
+        </button>
+      </div>
+
+      <div class="plan-card reveal reveal-delay-4">
+        <div class="plan-icon"><i class="fas fa-crown"></i></div>
+        <div class="plan-name">Elite</div>
+        <div class="plan-tagline">Bespoke managed portfolio</div>
+        <div class="plan-price">
+          <div class="plan-min">Minimum deposit</div>
+          <div class="plan-amount">$50,000</div>
+          <div class="plan-amount-note">Custom structures available</div>
+        </div>
+        <ul class="plan-features">
+          <li><i class="fas fa-check"></i> Everything in Premium</li>
+          <li><i class="fas fa-check"></i> Fully bespoke portfolio</li>
+          <li><i class="fas fa-check"></i> Private investment opportunities</li>
+          <li><i class="fas fa-check"></i> Direct line to CIO</li>
+          <li><i class="fas fa-check"></i> Real-time custom reporting</li>
+          <li><i class="fas fa-check"></i> Same-day withdrawals</li>
+          <li><i class="fas fa-check"></i> Tax &amp; estate planning</li>
+          <li><i class="fas fa-check"></i> White-glove onboarding</li>
+        </ul>
+        <button class="plan-btn" onclick="openPayment('Elite Plan', '$50,000+')">
+          <i class="fas fa-coins"></i> Invest Now
+        </button>
+      </div>
+    </div>
+
+    <div class="disclaimer reveal" style="margin-top:32px;">
+      <i class="fas fa-info-circle"></i>
+      <p><strong>Risk Disclaimer:</strong> All investments carry risk, including the possible loss of principal. Past performance is not indicative of future results. Investment returns vary based on market conditions. Please read our full risk disclosure before investing. If in doubt, consult an independent financial adviser.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px;" class="reveal">
+      <span class="label">How It Works</span>
+      <h2 class="section-title">Getting Started in 4 Steps</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal reveal-delay-1">
+        <div class="how-num">1</div>
+        <h3>Create Account</h3>
+        <p>Register your free account with your name, email, and ID verification to comply with KYC requirements.</p>
+      </div>
+      <div class="how-step reveal reveal-delay-2">
+        <div class="how-num">2</div>
+        <h3>Choose a Plan</h3>
+        <p>Select the investment plan that matches your financial goals and minimum deposit amount.</p>
+      </div>
+      <div class="how-step reveal reveal-delay-3">
+        <div class="how-num">3</div>
+        <h3>Fund with Crypto</h3>
+        <p>Send your investment amount in BTC, ETH, USDT, or USDC to our secure wallet address and submit your TX hash.</p>
+      </div>
+      <div class="how-step reveal reveal-delay-4">
+        <div class="how-num">4</div>
+        <h3>Track &amp; Grow</h3>
+        <p>Your account is credited within 24 hours. Monitor your portfolio in real time from your personal dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;" class="faq-layout">
+      <div class="reveal">
+        <span class="label">FAQ</span>
+        <h2 class="section-title">Plan Questions</h2>
+        <p class="section-sub">Can't find your answer? <a href="contact.html" style="color:var(--gold);font-weight:600;">Contact us</a> and we'll get back to you within one business day.</p>
+      </div>
+      <div class="faq-list reveal reveal-delay-2">
+        <div class="faq-item open">
+          <div class="faq-q"><span>Can I upgrade my plan later?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Yes. You can upgrade your plan at any time by depositing additional funds to reach the next tier's minimum. Your adviser will contact you to confirm the upgrade and update your portfolio strategy.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How do I withdraw my funds?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Withdrawals are processed via cryptocurrency to your verified wallet address. Submit a withdrawal request through your dashboard. Processing times vary by plan: Elite (same-day), Premium (48h), Growth/Starter (5–7 business days).</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>Which cryptocurrencies do you accept?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>We currently accept Bitcoin (BTC), Ethereum (ETH), USDT (TRC-20 and ERC-20), and USDC (ERC-20). All amounts are converted to USD equivalent at the time of deposit.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q"><span>How long does deposit confirmation take?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Deposits are typically confirmed within 1–24 hours depending on network congestion and the number of blockchain confirmations required. Our team manually verifies each transaction for security.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><img src="assets/images/mark.svg" alt="" width="40" height="40"><div class="logo-wordmark"><span class="logo-name">CLARENDON</span><span class="logo-sub">CAPITAL</span></div></a>
+        <p>We provide expert financial and real estate investment advice to individuals and businesses globally.</p>
+        <div class="footer-social">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="plans.html">Plans</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html#reit">Real Estate</a></li>
+          <li><a href="services.html#trusts">Investments</a></li>
+          <li><a href="services.html#retirement">Retirement</a></li>
+          <li><a href="services.html#stocks">Stocks</a></li>
+          <li><a href="services.html#commodities">Commodities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Get the latest market insights delivered to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Clarendon Capital. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+  const navToggle = document.getElementById('navToggle');
+  const navMobile = document.getElementById('navMobile');
+  const navOverlay = document.getElementById('overlay');
+  const navClose = document.getElementById('navClose');
+  function openNav() { navMobile.classList.add('open'); navOverlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeNav() { navMobile.classList.remove('open'); navOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+  navToggle.addEventListener('click', openNav);
+  navClose.addEventListener('click', closeNav);
+  navOverlay.addEventListener('click', closeNav);
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.closest('.faq-item'), isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  const revealObserver = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } }), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  /* PAYMENT MODAL */
+  const modal = document.getElementById('paymentModal');
+  const modalClose = document.getElementById('modalClose');
+
+  function openPayment(planName, amount) {
+    document.getElementById('modalPlanName').textContent = planName;
+    document.getElementById('modalPlanAmount').textContent = amount;
+    document.getElementById('paymentStep1').style.display = 'block';
+    document.getElementById('paymentSuccess').classList.remove('show');
+    updateCrypto();
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+  function getMinAmount() {
+    const text = document.getElementById('modalPlanAmount').textContent;
+    const num = parseInt(text.replace(/[^0-9]/g, ''));
+    return isNaN(num) ? 500 : num;
+  }
+
+  let activeCrypto = document.querySelector('.crypto-tab.active');
+
+  document.querySelectorAll('.crypto-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.crypto-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      activeCrypto = tab;
+      updateCrypto();
+    });
+  });
+
+  function updateCrypto() {
+    const tab = document.querySelector('.crypto-tab.active');
+    if (!tab) return;
+    const rate = parseFloat(tab.dataset.rate);
+    const minUSD = getMinAmount();
+    const cryptoAmt = (minUSD * rate).toFixed(rate < 0.001 ? 5 : rate < 1 ? 4 : 2);
+    document.getElementById('cryptoAmountValue').textContent = cryptoAmt + ' ' + tab.dataset.symbol;
+    document.getElementById('networkBadge').textContent = tab.dataset.network;
+    const addr = tab.dataset.address;
+    document.getElementById('walletAddress').value = addr;
+    document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(addr)}`;
+  }
+
+  function copyAddress() {
+    const addr = document.getElementById('walletAddress').value;
+    navigator.clipboard.writeText(addr).then(() => {
+      const btn = document.getElementById('copyBtn');
+      btn.classList.add('copied');
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = '<i class="fas fa-copy"></i>'; }, 2000);
+    });
+  }
+
+  function submitPayment() {
+    const txHash = document.getElementById('txHash').value.trim();
+    if (!txHash) { alert('Please enter your transaction hash to confirm your payment.'); return; }
+    document.getElementById('paymentStep1').style.display = 'none';
+    document.getElementById('paymentSuccess').classList.add('show');
+  }
+
+  updateCrypto();
+</script>
+</body>
+</html>

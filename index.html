@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clarendon Capital — Real Estate Investment & Financial Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:       #0B1F3A;
+      --navy-mid:   #162d52;
+      --navy-light: #1e3a6a;
+      --gold:       #C9A84C;
+      --gold-light: #e8c87a;
+      --gold-pale:  #f5e8c0;
+      --white:      #ffffff;
+      --off-white:  #F8F9FB;
+      --grey-100:   #F1F3F6;
+      --grey-300:   #D1D5DB;
+      --grey-500:   #6B7280;
+      --grey-700:   #374151;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--grey-700); background: var(--white); overflow-x: hidden; }
+    h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 96px 0; }
+    .section-alt { background: var(--off-white); }
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      font-family: 'Inter', sans-serif;
+    }
+    .section-title { font-size: clamp(2rem, 4vw, 2.75rem); color: var(--navy); line-height: 1.2; margin-bottom: 16px; }
+    .section-sub { font-size: 1.0625rem; color: var(--grey-500); line-height: 1.7; max-width: 580px; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+      font-family: 'Inter', sans-serif;
+    }
+    .btn-gold { background: var(--gold); color: var(--navy); }
+    .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.35); }
+    .btn-outline { background: transparent; border-color: var(--white); color: var(--white); }
+    .btn-outline:hover { background: var(--white); color: var(--navy); transform: translateY(-2px); }
+    .btn-navy { background: var(--navy); color: var(--white); }
+    .btn-navy:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(11,31,58,0.25); }
+
+    /* TOP BAR */
+    .topbar { background: var(--navy); padding: 10px 0; border-bottom: 1px solid rgba(201,168,76,0.2); }
+    .topbar-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .topbar-info { display: flex; gap: 24px; align-items: center; }
+    .topbar-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,255,255,0.75); }
+    .topbar-item i { color: var(--gold); font-size: 12px; }
+    .topbar-social { display: flex; gap: 10px; }
+    .topbar-social a {
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.7);
+      font-size: 12px;
+      transition: var(--transition);
+    }
+    .topbar-social a:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* NAV */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--white);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      transition: var(--transition);
+    }
+    .nav.scrolled { box-shadow: 0 4px 30px rgba(11,31,58,0.12); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+    .logo img { display: block; }
+    .nav-links { display: flex; list-style: none; gap: 4px; align-items: center; }
+    .nav-links > li { position: relative; }
+    .nav-links > li > a {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 14px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--grey-700);
+      border-radius: 4px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .nav-links > li > a:hover, .nav-links > li > a.active { color: var(--navy); background: var(--grey-100); }
+    .nav-links > li > a i { font-size: 10px; transition: transform 0.3s; }
+    .nav-links > li:hover > a i { transform: rotate(180deg); }
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-8px);
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.14);
+      min-width: 200px;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+      border-top: 3px solid var(--gold);
+      list-style: none;
+      padding: 8px 0;
+      z-index: 100;
+    }
+    .nav-links > li:hover .dropdown { opacity: 1; pointer-events: all; transform: translateX(-50%) translateY(0); }
+    .dropdown li a { display: block; padding: 10px 20px; font-size: 13.5px; color: var(--grey-700); transition: var(--transition); }
+    .dropdown li a:hover { background: var(--off-white); color: var(--navy); padding-left: 26px; }
+    .nav-cta { display: flex; gap: 10px; align-items: center; }
+    .nav-cta .btn { padding: 10px 22px; font-size: 14px; }
+    .nav-toggle { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--navy); border-radius: 2px; transition: var(--transition); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=1800&q=80');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      transform: scale(1.05);
+      animation: heroPan 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroPan {
+      from { transform: scale(1.05) translateX(0); }
+      to   { transform: scale(1.05) translateX(-2%); }
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11,31,58,0.97) 0%, rgba(11,31,58,0.75) 60%, rgba(11,31,58,0.4) 100%);
+    }
+    .hero-content { position: relative; z-index: 2; max-width: 700px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(201,168,76,0.15);
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--gold);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 28px;
+      animation: fadeInUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+      animation: fadeInUp 0.7s 0.1s ease both;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero-sub {
+      font-size: 1.125rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      animation: fadeInUp 0.7s 0.2s ease both;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; animation: fadeInUp 0.7s 0.3s ease both; }
+    .hero-stats {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(11,31,58,0.75);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(201,168,76,0.25);
+      z-index: 2;
+    }
+    .hero-stats-inner {
+      display: flex;
+      justify-content: space-around;
+      padding: 24px 0;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--gold);
+      display: block;
+    }
+    .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* FEATURES */
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--grey-100);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+    .feature-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(11,31,58,0.1); border-color: var(--gold-pale); }
+    .feature-icon {
+      width: 64px; height: 64px;
+      background: var(--gold-pale);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 24px;
+      color: var(--gold);
+      transition: var(--transition);
+    }
+    .feature-card:hover .feature-icon { background: var(--gold); color: var(--navy); }
+    .feature-card h3 { font-size: 1.125rem; color: var(--navy); margin-bottom: 10px; }
+    .feature-card p { font-size: 14px; color: var(--grey-500); line-height: 1.65; }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-img { position: relative; }
+    .about-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 16px; }
+    .about-img-badge {
+      position: absolute;
+      bottom: 28px; right: -20px;
+      background: var(--gold);
+      color: var(--navy);
+      border-radius: 12px;
+      padding: 20px 28px;
+      box-shadow: 0 12px 40px rgba(201,168,76,0.35);
+    }
+    .about-img-badge .num { font-family: 'Playfair Display', serif; font-size: 2.25rem; font-weight: 700; display: block; line-height: 1; }
+    .about-img-badge .txt { font-size: 13px; font-weight: 600; margin-top: 4px; }
+    .about-content .section-sub { max-width: 100%; margin-bottom: 24px; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .about-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--grey-700); }
+    .about-list li i { color: var(--gold); margin-top: 3px; font-size: 14px; flex-shrink: 0; }
+
+    /* SERVICES */
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .service-card {
+      position: relative;
+      background: var(--navy);
+      border-radius: 12px;
+      padding: 36px 28px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(11,31,58,0.25); }
+    .service-icon { font-size: 28px; color: var(--gold); margin-bottom: 18px; }
+    .service-card h3 { font-size: 1.1875rem; color: var(--white); margin-bottom: 10px; }
+    .service-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 18px;
+      transition: var(--transition);
+    }
+    .service-link:hover { gap: 10px; }
+
+    /* STATS */
+    .stats-section { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%); padding: 80px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { text-align: center; padding: 32px 24px; position: relative; }
+    .stat-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 50%; right: 0;
+      transform: translateY(-50%);
+      width: 1px; height: 60%;
+      background: rgba(255,255,255,0.1);
+    }
+    .stat-value { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: var(--gold); display: block; line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 14px; color: rgba(255,255,255,0.6); }
+
+    /* PARTNERS */
+    .partners-strip { background: var(--navy); padding: 48px 0; overflow: hidden; }
+    .partners-label { text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 32px; font-family: 'Inter', sans-serif; }
+    .partners-overflow { overflow: hidden; }
+    .partners-track {
+      display: flex;
+      gap: 64px;
+      align-items: center;
+      animation: scrollPartners 30s linear infinite;
+      width: max-content;
+    }
+    .partners-track img { height: 30px; opacity: 0.4; filter: brightness(0) invert(1); transition: opacity 0.3s; }
+    .partners-track img:hover { opacity: 0.8; }
+    @keyframes scrollPartners {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* TESTIMONIAL */
+    .testimonial-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 56px 64px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.07);
+      text-align: center;
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      color: var(--gold-pale);
+      line-height: 0;
+      position: absolute;
+      top: 60px; left: 40px;
+    }
+    .testimonial-text { font-size: 1.125rem; color: var(--grey-700); line-height: 1.8; font-style: italic; margin-bottom: 32px; position: relative; z-index: 1; }
+    .testimonial-author { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .testimonial-avatar { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); }
+    .testimonial-name { font-size: 15px; font-weight: 600; color: var(--navy); font-family: 'Inter', sans-serif; }
+    .testimonial-role { font-size: 13px; color: var(--grey-500); }
+    .testimonial-stars { color: var(--gold); font-size: 13px; margin-top: 3px; }
+
+    /* FAQ */
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item { background: var(--white); border: 1px solid var(--grey-100); border-radius: 10px; overflow: hidden; transition: var(--transition); }
+    .faq-item.open { border-color: var(--gold); box-shadow: 0 4px 24px rgba(201,168,76,0.12); }
+    .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; gap: 16px; }
+    .faq-q span { font-size: 15px; font-weight: 600; color: var(--navy); font-family: 'Inter', sans-serif; }
+    .faq-q i { color: var(--gold); font-size: 14px; transition: transform 0.3s; flex-shrink: 0; }
+    .faq-item.open .faq-q i { transform: rotate(45deg); }
+    .faq-a { padding: 0 24px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s ease; }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 20px; }
+    .faq-a p { font-size: 14.5px; color: var(--grey-500); line-height: 1.75; }
+    .faq-cta {
+      background: linear-gradient(135deg, var(--navy), var(--navy-light));
+      border-radius: 16px;
+      padding: 48px 40px;
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .faq-cta h3 { font-size: 1.75rem; line-height: 1.3; }
+    .faq-cta p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+    .divider { display: flex; gap: 12px; align-items: center; }
+    .divider-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+    .divider-text { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+    .contact-info h2 { font-size: 2rem; color: var(--navy); margin-bottom: 14px; }
+    .contact-info p { font-size: 15px; color: var(--grey-500); line-height: 1.7; margin-bottom: 36px; }
+    .contact-items { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-item-icon { width: 44px; height: 44px; flex-shrink: 0; background: var(--gold-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--gold); font-size: 16px; }
+    .contact-item-text { font-size: 14px; }
+    .contact-item-text strong { display: block; color: var(--navy); font-weight: 600; margin-bottom: 2px; font-family: 'Inter', sans-serif; }
+    .contact-item-text span { color: var(--grey-500); }
+    .contact-form { background: var(--white); border-radius: 16px; padding: 48px; box-shadow: 0 8px 48px rgba(0,0,0,0.07); }
+    .contact-form h3 { font-size: 1.375rem; color: var(--navy); margin-bottom: 28px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 13px; font-weight: 600; color: var(--grey-700); font-family: 'Inter', sans-serif; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px;
+      border: 1.5px solid var(--grey-300);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14.5px;
+      color: var(--grey-700);
+      transition: var(--transition);
+      outline: none;
+      background: var(--white);
+      width: 100%;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.12); }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-note { font-size: 12px; color: var(--grey-500); margin-bottom: 20px; display: flex; align-items: center; gap: 6px; }
+    .form-note i { color: var(--gold); }
+
+    /* FOOTER */
+    .footer { background: var(--navy); color: var(--white); }
+    .footer-main { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 48px; padding: 72px 0 48px; }
+    .footer-brand .logo { color: var(--white); margin-bottom: 18px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.75; margin-bottom: 24px; }
+    .footer-social { display: flex; gap: 10px; }
+    .footer-social a {
+      width: 36px; height: 36px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.6);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+    .footer-social a:hover { background: var(--gold); color: var(--navy); }
+    .footer-col h4 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 18px; text-transform: uppercase; letter-spacing: 1.5px; font-family: 'Inter', sans-serif; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.55); transition: var(--transition); display: flex; align-items: center; gap: 6px; }
+    .footer-links a::before { content: '→'; font-size: 11px; color: var(--gold); }
+    .footer-links a:hover { color: var(--white); padding-left: 4px; }
+    .footer-newsletter p { font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 18px; line-height: 1.6; }
+    .newsletter-form { display: flex; }
+    .newsletter-form input {
+      flex: 1;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-right: none;
+      border-radius: 6px 0 0 6px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: var(--transition);
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+    .newsletter-form input:focus { border-color: var(--gold); }
+    .newsletter-form button {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 12px 18px;
+      cursor: pointer;
+      border-radius: 0 6px 6px 0;
+      font-weight: 700;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+    .newsletter-form button:hover { background: var(--gold-light); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.4); }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 13px; color: rgba(255,255,255,0.4); transition: var(--transition); }
+    .footer-bottom-links a:hover { color: var(--gold); }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* MOBILE */
+    .nav-mobile {
+      position: fixed;
+      top: 0; right: 0;
+      width: 300px;
+      height: 100vh;
+      background: var(--navy);
+      z-index: 9999;
+      padding: 32px 24px;
+      transform: translateX(100%);
+      transition: var(--transition);
+      overflow-y: auto;
+      display: none;
+    }
+    .nav-mobile.open { transform: translateX(0); }
+    .nav-mobile-close { background: none; border: none; color: var(--white); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: flex-end; width: 100%; margin-bottom: 32px; }
+    .nav-mobile-links { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .nav-mobile-links a { display: block; padding: 12px 16px; color: rgba(255,255,255,0.8); font-size: 15px; border-radius: 8px; transition: var(--transition); }
+    .nav-mobile-links a:hover { background: rgba(255,255,255,0.08); color: var(--gold); }
+    .nav-mobile-cta { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 9998; opacity: 0; pointer-events: none; transition: opacity 0.3s; display: none; }
+    .overlay.open { opacity: 1; pointer-events: all; }
+
+    @media (max-width: 1024px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-mobile { display: block; }
+      .overlay { display: block; }
+      .features-grid { grid-template-columns: 1fr 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img { display: none; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-item:not(:last-child)::after { display: none; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr 1fr; }
+      .topbar-info { display: none; }
+      .about-img-badge { right: 0; }
+    }
+    @media (max-width: 640px) {
+      .section { padding: 64px 0; }
+      .features-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .testimonial-card { padding: 40px 28px; }
+      .contact-form { padding: 32px 24px; }
+      .hero-btns .btn { padding: 12px 22px; font-size: 14px; }
+      .hero-stats-inner { gap: 8px; }
+      .hero-stat-value { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="topbar-info">
+        <div class="topbar-item"><i class="fas fa-clock"></i> Mon–Fri: 07:30 – 19:00</div>
+        <div class="topbar-item"><i class="fas fa-map-marker-alt"></i> Goldsmith Hall, New York, NY 90210</div>
+        <div class="topbar-item"><i class="fas fa-phone"></i> +1 (401) 992-4872</div>
+      </div>
+      <div class="topbar-social">
+        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <img src="assets/images/mark.svg" alt="" width="40" height="40">
+        <div class="logo-wordmark">
+          <span class="logo-name">CLARENDON</span>
+          <span class="logo-sub">CAPITAL</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li>
+          <a href="services.html">Services <i class="fas fa-chevron-down"></i></a>
+          <ul class="dropdown">
+            <li><a href="services.html#reit">Real Estate</a></li>
+            <li><a href="services.html#financial-planning">Financial Planning</a></li>
+            <li><a href="services.html#bonds">Bonds</a></li>
+            <li><a href="services.html#commodities">Commodities</a></li>
+            <li><a href="services.html#trusts">Investment Trusts</a></li>
+            <li><a href="services.html#mutual-funds">Mutual Funds</a></li>
+            <li><a href="services.html#retirement">Retirement</a></li>
+            <li><a href="services.html#stocks">Stocks &amp; Trades</a></li>
+          </ul>
+        </li>
+        <li><a href="plans.html">Plans</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="dashboard/signup.html" class="btn btn-gold">Open Account</a>
+        <a href="dashboard/signin.html" style="font-size:14px;font-weight:500;color:var(--grey-700);padding:10px 12px;">Sign In</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="overlay" id="overlay"></div>
+<div class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navClose"><i class="fas fa-times"></i></button>
+  <ul class="nav-mobile-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="plans.html">Plans</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-mobile-cta">
+    <a href="dashboard/signup.html" class="btn btn-gold" style="justify-content:center;">Open Account</a>
+    <a href="dashboard/signin.html" class="btn btn-outline" style="justify-content:center;">Sign In</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-award"></i> 20+ Years of Industry Excellence</div>
+      <h1>Your <span>Real Estate &amp;</span><br>Investment Partner</h1>
+      <p class="hero-sub">We combine two decades of expertise with modern financial intelligence to grow, protect, and manage your wealth — from real estate to global markets.</p>
+      <div class="hero-btns">
+        <a href="dashboard/signup.html" class="btn btn-gold"><i class="fas fa-user-plus"></i> Open Free Account</a>
+        <a href="about.html" class="btn btn-outline"><i class="fas fa-play-circle"></i> Learn More</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="container">
+      <div class="hero-stats-inner">
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-count="370" data-prefix="$" data-suffix="M+">$0M+</span>
+          <div class="hero-stat-label">Assets Under Management</div>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-count="408" data-suffix="+">0+</span>
+          <div class="hero-stat-label">Projects Completed</div>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-count="12" data-suffix="">0</span>
+          <div class="hero-stat-label">International Awards</div>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-value" data-count="100" data-suffix="%">0%</span>
+          <div class="hero-stat-label">Client Satisfaction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px;" class="reveal">
+      <span class="label">Why Choose Us</span>
+      <h2 class="section-title">The Optimum Approach<br>With Your Money</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal reveal-delay-1">
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Comprehensive</h3>
+        <p>We create a detailed investment plan, personalized to your financial goals and business needs.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <div class="feature-icon"><i class="fas fa-medal"></i></div>
+        <h3>Experienced</h3>
+        <p>Over 20 years of expert real estate and financial advisory experience across global markets.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Friendly</h3>
+        <p>A passionate, enthusiastic team of advisers always ready to guide you every step of the way.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-4">
+        <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Professional</h3>
+        <p>Our financial specialists ensure compliance, transparency, and optimum results for every client.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img reveal">
+        <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=80" alt="Real estate professionals" />
+        <div class="about-img-badge">
+          <span class="num">20+</span>
+          <span class="txt">Years of Excellence</span>
+        </div>
+      </div>
+      <div class="about-content reveal reveal-delay-2">
+        <span class="label">About Us</span>
+        <h2 class="section-title">Building Wealth Through<br>Smarter Real Estate</h2>
+        <p class="section-sub">We provide experience across a full range of investment capabilities — from traditional core strategies to opportunistic property development and global market access.</p>
+        <ul class="about-list">
+          <li><i class="fas fa-check-circle"></i> Operating under the Real Estate Investment Trust (REIT) trademark</li>
+          <li><i class="fas fa-check-circle"></i> Global real estate and asset management services</li>
+          <li><i class="fas fa-check-circle"></i> Investment services across Forex, CFDs, metals, bonds, and crypto</li>
+          <li><i class="fas fa-check-circle"></i> External auditors for regulatory compliance and transparency</li>
+          <li><i class="fas fa-check-circle"></i> Individually tailored portfolios for every investor profile</li>
+        </ul>
+        <a href="contact.html" class="btn btn-navy"><i class="fas fa-arrow-right"></i> Get in Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px;" class="reveal">
+      <span class="label">What We Offer</span>
+      <h2 class="section-title">Our Investment Services</h2>
+      <p class="section-sub" style="margin:12px auto 0;">Comprehensive financial solutions built for individuals and institutions worldwide.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon"><i class="fas fa-home"></i></div>
+        <h3>Real Estate (REIT)</h3>
+        <p>Residential and commercial property investments managed under the REIT framework for reliable returns.</p>
+        <a href="services.html#reit" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon"><i class="fas fa-chart-pie"></i></div>
+        <h3>Financial Planning</h3>
+        <p>Custom financial roadmaps tailored to your income, goals, risk tolerance, and timeline.</p>
+        <a href="services.html#financial-planning" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon"><i class="fas fa-coins"></i></div>
+        <h3>Bonds &amp; Commodities</h3>
+        <p>Diversify with stable bond instruments and high-potential commodity investments like metals and energies.</p>
+        <a href="services.html#bonds" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon"><i class="fas fa-landmark"></i></div>
+        <h3>Mutual Funds &amp; Trusts</h3>
+        <p>Pooled investment vehicles professionally managed for consistent long-term wealth accumulation.</p>
+        <a href="services.html#trusts" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon"><i class="fas fa-piggy-bank"></i></div>
+        <h3>Retirement Planning</h3>
+        <p>Secure your future with structured retirement accounts and strategic long-term investment solutions.</p>
+        <a href="services.html#retirement" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon"><i class="fas fa-exchange-alt"></i></div>
+        <h3>Stocks &amp; Trades</h3>
+        <p>Access global equity markets with expert guidance on stock selection, Forex, CFDs, and crypto trading.</p>
+        <a href="services.html#stocks" class="service-link">Learn more <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-value" data-count="370" data-prefix="$" data-suffix="M+">$0M+</span>
+        <span class="stat-label">Asset Valuation</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-value" data-count="408" data-suffix="+">0+</span>
+        <span class="stat-label">Projects Completed</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-value" data-count="12" data-suffix="">0</span>
+        <span class="stat-label">International Awards</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-4">
+        <span class="stat-value" data-count="100" data-suffix="%">0%</span>
+        <span class="stat-label">Client Satisfaction</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNERS -->
+<div class="partners-strip">
+  <p class="partners-label">Trusted Partners &amp; Affiliates</p>
+  <div class="partners-overflow">
+    <div class="partners-track">
+      <img src="https://movatorealtors.com/assets/images/partners/coinone-1.svg" alt="CoinOne" />
+      <img src="https://movatorealtors.com/assets/images/partners/ledger-new-logo-.svg" alt="Ledger" />
+      <img src="https://movatorealtors.com/assets/images/partners/plasmapay-1.svg" alt="PlasmaPay" />
+      <img src="https://movatorealtors.com/assets/images/partners/waves-6.svg" alt="Waves" />
+      <img src="https://movatorealtors.com/assets/images/partners/bbva-2019.svg" alt="BBVA" />
+      <img src="https://movatorealtors.com/assets/images/partners/huobi-1.svg" alt="Huobi" />
+      <img src="https://movatorealtors.com/assets/images/partners/zcash.svg" alt="Zcash" />
+      <img src="https://movatorealtors.com/assets/images/partners/coinone-1.svg" alt="CoinOne" />
+      <img src="https://movatorealtors.com/assets/images/partners/ledger-new-logo-.svg" alt="Ledger" />
+      <img src="https://movatorealtors.com/assets/images/partners/plasmapay-1.svg" alt="PlasmaPay" />
+      <img src="https://movatorealtors.com/assets/images/partners/waves-6.svg" alt="Waves" />
+      <img src="https://movatorealtors.com/assets/images/partners/bbva-2019.svg" alt="BBVA" />
+      <img src="https://movatorealtors.com/assets/images/partners/huobi-1.svg" alt="Huobi" />
+      <img src="https://movatorealtors.com/assets/images/partners/zcash.svg" alt="Zcash" />
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIAL -->
+<section class="section section-alt">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;" class="reveal">
+      <span class="label">Client Stories</span>
+      <h2 class="section-title">What Our Clients Say</h2>
+    </div>
+    <div class="testimonial-card reveal">
+      <p class="testimonial-text">"We are absolutely delighted with where our finances stand today. The team provided a truly tailored solution that matched our goals precisely. Their expertise in both real estate and financial markets gave us confidence every step of the way. We would recommend them to anyone seeking serious, results-driven financial planning."</p>
+      <div class="testimonial-author">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt="Bill Jefferson" class="testimonial-avatar" />
+        <div>
+          <div class="testimonial-name">Bill Jefferson</div>
+          <div class="testimonial-role">CEO, Jefferson Capital Group</div>
+          <div class="testimonial-stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div style="margin-bottom:52px;" class="reveal">
+      <span class="label">FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-list">
+        <div class="faq-item open reveal">
+          <div class="faq-q"><span>How secure is your platform?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Your financial assets are held with a licensed insurance custodian for safekeeping, preventing misappropriation, misuse, theft, and loss in accordance with applicable law. We maintain detailed records of all investments.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <div class="faq-q"><span>Do you offer individually tailored plans?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Yes. We work closely with each client to craft an investment portfolio custom-tailored to their goals, current financial situation, and risk preference. No two plans are the same.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <div class="faq-q"><span>What industries do you specialize in?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>We are global real estate and asset management service providers, offering investment services across REITs, residential and commercial real estate, Forex, CFDs on indices, metals, energies, bonds, stocks, and cryptocurrencies.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <div class="faq-q"><span>What is the minimum investment amount?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Minimum investment thresholds vary by plan. We offer accessible entry points for new investors as well as institutional-grade services for larger portfolios. Contact us for a personalized assessment.</p></div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <div class="faq-q"><span>How do I get started?</span><i class="fas fa-plus"></i></div>
+          <div class="faq-a"><p>Simply open a free account online or request a callback from one of our advisers. We'll schedule a consultation to understand your goals and present the most suitable investment plan.</p></div>
+        </div>
+      </div>
+      <div class="faq-cta reveal reveal-delay-2">
+        <span class="label" style="color:var(--gold-light);">Ready to Start?</span>
+        <h3>Have More Questions? Let's Talk.</h3>
+        <p>Our advisers are available Monday to Friday, 07:30–19:00. We'd love to walk you through your options at no obligation.</p>
+        <a href="contact.html" class="btn btn-gold"><i class="fas fa-phone"></i> Request a Call Back</a>
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span class="divider-text">or email us directly</span>
+          <div class="divider-line"></div>
+        </div>
+        <a href="mailto:info@clarendoncapital.com" style="color:var(--gold-light);font-size:14px;display:flex;align-items:center;gap:8px;">
+          <i class="fas fa-envelope"></i> info@clarendoncapital.com
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <span class="label">Get in Touch</span>
+        <h2 class="section-title">Request a Callback</h2>
+        <p>Submit your details and one of our financial advisers will be in touch shortly. All information is kept strictly confidential.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-item-text">
+              <strong>Office Hours</strong>
+              <span>Monday – Friday: 07:30 – 19:00</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-item-text">
+              <strong>Our Address</strong>
+              <span>Goldsmith Hall, New York, NY 90210</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              <span>+1 (401) 992-4872</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>info@clarendoncapital.com</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal reveal-delay-2">
+        <h3>Send Us a Message</h3>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">First Name</label>
+              <input id="fname" type="text" placeholder="John" />
+            </div>
+            <div class="form-group">
+              <label for="lname">Last Name</label>
+              <input id="lname" type="text" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input id="email" type="email" placeholder="john@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="topic">I Would Like to Discuss</label>
+            <select id="topic">
+              <option value="">Select a topic...</option>
+              <option>Investment Opportunities</option>
+              <option>Personal Finance</option>
+              <option>Stock Trading</option>
+              <option>Retirement Planning</option>
+              <option>Real Estate</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message (Optional)</label>
+            <textarea id="message" placeholder="Tell us a bit about your financial goals..."></textarea>
+          </div>
+          <p class="form-note"><i class="fas fa-lock"></i> Your details are kept strictly confidential as per our Privacy Policy.</p>
+          <button type="submit" class="btn btn-gold" style="width:100%;justify-content:center;padding:15px;font-size:15px;">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="assets/images/mark.svg" alt="" width="40" height="40">
+          <div class="logo-wordmark">
+            <span class="logo-name">CLARENDON</span>
+            <span class="logo-sub">CAPITAL</span>
+          </div>
+        </a>
+        <p>We provide expert financial and real estate investment advice to individuals and businesses globally. With 20+ years of experience, we ensure you always get the best guidance.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#faq">Plans</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul class="footer-links">
+          <li><a href="#">Real Estate</a></li>
+          <li><a href="#">Investments</a></li>
+          <li><a href="#">Retirement</a></li>
+          <li><a href="#">Stocks</a></li>
+          <li><a href="#">Commodities</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-newsletter">
+        <h4>Newsletter</h4>
+        <p>Get the latest market insights and investment tips delivered to your inbox.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" />
+          <button type="submit" aria-label="Subscribe"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Clarendon Capital. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Legal</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const navMobile = document.getElementById('navMobile');
+  const overlay   = document.getElementById('overlay');
+  const navClose  = document.getElementById('navClose');
+
+  function openNav()  { navMobile.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeNav() { navMobile.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+  navToggle.addEventListener('click', openNav);
+  navClose.addEventListener('click', closeNav);
+  overlay.addEventListener('click', closeNav);
+
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item   = q.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  function animateCount(el) {
+    const target   = parseInt(el.dataset.count);
+    const prefix   = el.dataset.prefix || '';
+    const suffix   = el.dataset.suffix || '';
+    const duration = 1800;
+    const start    = performance.now();
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease     = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + Math.floor(ease * target) + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        animateCount(e.target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+</script>
+</body>
+</html>
