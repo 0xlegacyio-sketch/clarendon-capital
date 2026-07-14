@@ -2,7 +2,7 @@
 
 A real estate investment and financial services website.
 
-**Live site:** [https://clarendon.vercel.app](https://clarendon.vercel.app)
+**Live site:** [https://clarendonCapital.vercel.app](https://clarendonCapital.vercel.app)
 
 ## Pages
 
