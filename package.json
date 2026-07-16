@@ -1,0 +1,22 @@
+{
+  "name": "clarendon-capital",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "db:setup": "npx vercel postgres execute --file ./sql/schema.sql",
+    "db:seed": "npx vercel postgres execute --file ./sql/seed.sql"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.10.0",
+    "bcryptjs": "^2.4.3",
+    "cookie": "^0.7.0"
+  },
+  "devDependencies": {
+    "vercel": "^39.0.0"
+  },
+  "engines": {
+    "node": ">=20.x"
+  }
+}
